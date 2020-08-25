@@ -55,10 +55,10 @@ declare namespace routeguide {
     }
 
     export interface RouteGuideService {
-        GetFeature: (r:Point) => Feature;
-        ListFeatures: (r:Rectangle) => AsyncIterator<Feature>;
-        RecordRoute: (r:AsyncIterator<Point>) => RouteSummary;
-        RouteChat: (r:AsyncIterator<RouteNote>) => AsyncIterator<RouteNote>;
+        GetFeature: (r:Point) => { response: Feature, code: number, message: string, detail: any };
+        ListFeatures: (r:Rectangle) => AsyncIterator<{ response: Feature, code: number, message: string, detail: any }>;
+        RecordRoute: (r:AsyncIterator<Point>) => { response: RouteSummary, code: number, message: string, detail: any };
+        RouteChat: (r:AsyncIterator<RouteNote>) => AsyncIterator<{ response: RouteNote, code: number, message: string, detail: any }>;
     }
 }
 

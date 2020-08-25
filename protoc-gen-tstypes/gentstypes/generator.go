@@ -457,7 +457,7 @@ func (g *Generator) generateServiceMethods(service *desc.ServiceDescriptor, para
 }
 func (g *Generator) generateServiceMethod(method *desc.MethodDescriptor, params *Parameters) {
 	i := method.GetInputType().GetName()
-	o := method.GetOutputType().GetName()
+	o := fmt.Sprintf("{ response: %s, code: number, message: string, detail: any }", method.GetOutputType().GetName())
 	if params.AsyncIterators {
 		if method.IsServerStreaming() {
 			o = fmt.Sprintf("AsyncIterator<%s>", o)

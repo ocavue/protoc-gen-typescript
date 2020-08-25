@@ -55,10 +55,10 @@ declare namespace routeguide {
     }
 
     export interface RouteGuideService {
-        GetFeature: (r:Point) => Feature;
-        ListFeatures: (r:Rectangle, cb:(a:{value: Feature, done: boolean}) => void) => void;
-        RecordRoute: (r:() => {value: Point, done: boolean}) => RouteSummary;
-        RouteChat: (r:() => {value: RouteNote, done: boolean}, cb:(a:{value: RouteNote, done: boolean}) => void) => void;
+        GetFeature: (r:Point) => { response: Feature, code: number, message: string, detail: any };
+        ListFeatures: (r:Rectangle, cb:(a:{value: { response: Feature, code: number, message: string, detail: any }, done: boolean}) => void) => void;
+        RecordRoute: (r:() => {value: Point, done: boolean}) => { response: RouteSummary, code: number, message: string, detail: any };
+        RouteChat: (r:() => {value: RouteNote, done: boolean}, cb:(a:{value: { response: RouteNote, code: number, message: string, detail: any }, done: boolean}) => void) => void;
     }
 }
 

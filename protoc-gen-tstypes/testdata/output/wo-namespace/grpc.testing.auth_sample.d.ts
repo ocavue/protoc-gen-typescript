@@ -18,5 +18,5 @@ export interface Response {
 }
 
 export interface TestServiceService {
-    UnaryCall: (r:Request) => Response;
+    UnaryCall: (r:Request) => { response: Response, code: number, message: string, detail: any };
 }
