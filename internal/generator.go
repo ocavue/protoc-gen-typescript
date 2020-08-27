@@ -63,6 +63,7 @@ type FieldOptions struct {
 	IsRequired bool
 }
 
+// Create a new Generator
 func New() *Generator {
 	return &Generator{
 		Buffer:   new(bytes.Buffer),

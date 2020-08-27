@@ -31,10 +31,10 @@ func main() {
 	}
 	data, err := ioutil.ReadAll(os.Stdin)
 	if err != nil {
-		log.Fatalln(errors.Wrap(err, "reading input"))
+		log.Fatalln(errors.Wrap(err, "failed to reading input"))
 	}
 	if err := proto.Unmarshal(data, g.Request); err != nil {
-		log.Fatalln(errors.Wrap(err, "parsing input"))
+		log.Fatalln(errors.Wrap(err, "failed to parsing input"))
 	}
 	if len(g.Request.FileToGenerate) == 0 {
 		log.Fatalln(errors.Wrap(err, "no files to generate"))
