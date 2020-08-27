@@ -8,8 +8,8 @@ import (
 	"strings"
 
 	"github.com/golang/protobuf/proto"
+	"github.com/ocavue/protoc-gen-typescript/protoc-gen-typescript/gentstypes"
 	"github.com/pkg/errors"
-	"github.com/tmc/grpcutil/protoc-gen-typescript/gentstypes"
 	"golang.org/x/crypto/ssh/terminal"
 )
 

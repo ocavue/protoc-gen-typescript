@@ -1,6 +1,6 @@
-module github.com/tmc/grpcutil
+module github.com/ocavue/protoc-gen-typescript
 
-go 1.12
+go 1.14
 
 require (
 	github.com/Masterminds/goutils v1.1.0 // indirect

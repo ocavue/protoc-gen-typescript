@@ -2,16 +2,16 @@
 //
 // Example input:
 //
-// https://github.com/tmc/grpcutil/blob/master/protoc-gen-typescript/testdata/route_guide.proto
+// https://github.com/ocavue/protoc-gen-typescript/blob/master/protoc-gen-typescript/testdata/route_guide.proto
 //
 // Example output:
 //
-// https://github.com/tmc/grpcutil/blob/master/protoc-gen-typescript/testdata/output/defaults/routeguide.route_guide.d.ts
+// https://github.com/ocavue/protoc-gen-typescript/blob/master/protoc-gen-typescript/testdata/output/defaults/routeguide.route_guide.d.ts
 //
 // Installation
 //
 // protoc-gen-typescript is written in go. Assuming you have a working go installation (see https://golang.org/doc/install) you can fetch and build this project by executing:
-//  go get github.com/tmc/grpcutil/protoc-gen-typescript
+//  go get github.com/ocavue/protoc-gen-typescript/protoc-gen-typescript
 // This will place the protoc-gen-typescript binary in the $GOPATH/bin directory. If GOPATH has not been set it defaults to $HOME/go. The $GOPATH/bin directory should be on your PATH, see the install reference above for details.
 //
 // Usage
@@ -33,6 +33,6 @@
 // An example of running with a custom option set:
 //  protoc -I. --tstypes_out=original_names=true,async_iterators=true:. route_guide.proto
 //
-// examples.sh contains more complex examples and generated output can be seen at https://github.com/tmc/grpcutil/blob/master/protoc-gen-typescript/testdata/output
+// examples.sh contains more complex examples and generated output can be seen at https://github.com/ocavue/protoc-gen-typescript/blob/master/protoc-gen-typescript/testdata/output
 //
 package main
