@@ -1,4 +1,4 @@
-package gentstypes
+package internal
 
 import (
 	"path/filepath"

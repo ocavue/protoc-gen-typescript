@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/ocavue/protoc-gen-typescript/protoc-gen-typescript/gentstypes"
+	"github.com/ocavue/protoc-gen-typescript/internal"
 	"github.com/pkg/errors"
 	"golang.org/x/crypto/ssh/terminal"
 )
@@ -25,7 +25,7 @@ var (
 )
 
 func main() {
-	g := gentstypes.New()
+	g := internal.New()
 	if terminal.IsTerminal(0) {
 		flag.Usage()
 		log.Fatalln("stdin appears to be a tty device. This tool is meant to be invoked via the protoc command via a --tstypes_out directive.")
@@ -41,7 +41,7 @@ func main() {
 		log.Fatalln(errors.Wrap(err, "no files to generate"))
 	}
 	parseFlags(g.Request.Parameter)
-	g.GenerateAllFiles(&gentstypes.Parameters{
+	g.GenerateAllFiles(&internal.Parameters{
 		AsyncIterators:        *flagAsyncIterators,
 		DeclareNamespace:      *flagDeclareNamespace,
 		Verbose:               *flagVerbose,

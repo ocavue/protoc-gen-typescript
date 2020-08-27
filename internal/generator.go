@@ -1,4 +1,4 @@
-package gentstypes
+package internal
 
 // TODO: add nested messages support
 // TODO: add nested enum support
@@ -19,9 +19,6 @@ import (
 	"github.com/golang/protobuf/protoc-gen-go/descriptor"
 	plugin "github.com/golang/protobuf/protoc-gen-go/plugin"
 	"github.com/jhump/protoreflect/desc"
-	"github.com/ocavue/protoc-gen-typescript/protoc-gen-typescript/opts"
-
-	"google.golang.org/genproto/googleapis/api/annotations"
 )
 
 const indent = "    "
@@ -224,40 +221,6 @@ func (g *Generator) generateServices(services []*desc.ServiceDescriptor, params 
 	}
 }
 
-func DefaultMessageOptionsFunc(m *desc.MessageDescriptor) MessageOptions {
-	result := MessageOptions{}
-	if o, err := proto.GetExtension(m.AsDescriptorProto().Options, opts.E_FieldDefaults); err == nil {
-		if o, ok := o.(*opts.Options); ok {
-			fieldRequiredDefault := o.GetRequired() || o.GetFieldBehavior() == annotations.FieldBehavior_REQUIRED
-			result.DefaultFieldOptions = &FieldOptions{IsRequired: fieldRequiredDefault}
-		}
-	}
-	return result
-}
-
-func DefaultFieldOptionsFunc(mOpts MessageOptions, f *desc.FieldDescriptor) FieldOptions {
-	required := false
-	if mOpts.DefaultFieldOptions != nil {
-		required = mOpts.DefaultFieldOptions.IsRequired
-	}
-	e, err := proto.GetExtension(f.AsFieldDescriptorProto().Options, opts.E_Field)
-	if err == nil {
-		if e, ok := e.(*opts.Options); ok {
-			required = e.GetRequired()
-		}
-	}
-	if o, err := proto.GetExtension(f.AsFieldDescriptorProto().Options, annotations.E_FieldBehavior); err == nil {
-		if opts, ok := o.([]annotations.FieldBehavior); ok {
-			for _, opt := range opts {
-				if opt == annotations.FieldBehavior_REQUIRED {
-					required = true
-				}
-			}
-		}
-	}
-	return FieldOptions{IsRequired: required}
-}
-
 /*
 generateMessageInterface is used to generate TypeScript interface:
 
@@ -268,11 +231,6 @@ export interface MyMessage {
 func (g *Generator) generateMessageInterface(m *desc.MessageDescriptor, params *Parameters) {
 	name := m.GetName()
 
-	mOpts := DefaultMessageOptionsFunc(m)
-	if params.MessageOptionsFunc != nil {
-		mOpts = params.MessageOptionsFunc(m)
-	}
-
 	g.writeComment(m.GetSourceInfo().GetLeadingComments())
 	g.W(fmt.Sprintf("export interface %s {", name))
 	for _, f := range m.GetFields() {
@@ -280,12 +238,7 @@ func (g *Generator) generateMessageInterface(m *desc.MessageDescriptor, params *
 		if !params.OriginalNames {
 			name = f.GetJSONName()
 		}
-		fOptsFn := DefaultFieldOptionsFunc
-		if params.FieldOptionsFunc != nil {
-			fOptsFn = params.FieldOptionsFunc
-		}
-		fOpts := fOptsFn(mOpts, f)
-		required := fOpts.IsRequired
+		required := false
 
 		suffix := ""
 		if !required {
