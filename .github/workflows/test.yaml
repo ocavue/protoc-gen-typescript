@@ -1,7 +1,7 @@
 on: push
 
 jobs:
-  protoc-gen-tstypes:
+  protoc-gen-typescript:
     runs-on: ubuntu-latest
 
     env:
@@ -29,12 +29,12 @@ jobs:
         run: |
           go install github.com/golang/protobuf/protoc-gen-go
 
-      - name: install protoc-gen-tstypes
+      - name: install protoc-gen-typescript
         run: |
-          cd protoc-gen-tstypes
+          cd protoc-gen-typescript
           make build
 
       - name: build examples
         run: |
-          cd protoc-gen-tstypes
+          cd protoc-gen-typescript
           make examples

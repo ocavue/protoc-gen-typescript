@@ -3,9 +3,9 @@ package-lock.json
 .env
 
 # These file will be created during build time
-protoc-gen-tstypes/testdata/any.proto
-protoc-gen-tstypes/testdata/duration.proto
-protoc-gen-tstypes/testdata/empty.proto
-protoc-gen-tstypes/testdata/struct.proto
-protoc-gen-tstypes/testdata/timestamp.proto
-protoc-gen-tstypes/testdata/wrappers.proto
+protoc-gen-typescript/testdata/any.proto
+protoc-gen-typescript/testdata/duration.proto
+protoc-gen-typescript/testdata/empty.proto
+protoc-gen-typescript/testdata/struct.proto
+protoc-gen-typescript/testdata/timestamp.proto
+protoc-gen-typescript/testdata/wrappers.proto
