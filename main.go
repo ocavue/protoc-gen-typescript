@@ -27,7 +27,7 @@ func main() {
 	g := internal.New()
 	if terminal.IsTerminal(0) {
 		flag.Usage()
-		log.Fatalln("stdin appears to be a tty device. This tool is meant to be invoked via the protoc command via a --tstypes_out directive.")
+		log.Fatalln("stdin appears to be a tty device. This tool is meant to be invoked via the protoc command via a --typescript_out directive.")
 	}
 	data, err := ioutil.ReadAll(os.Stdin)
 	if err != nil {
