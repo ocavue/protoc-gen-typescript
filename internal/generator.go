@@ -28,7 +28,6 @@ type FieldOptionsFunc = func(MessageOptions, *desc.FieldDescriptor) FieldOptions
 
 type Parameters struct {
 	AsyncIterators        bool
-	DeclareNamespace      bool
 	OutputNamePattern     string
 	DumpRequestDescriptor bool
 	EnumsAsInt            bool
@@ -154,21 +153,9 @@ func (g *Generator) GenerateAllFiles(params *Parameters) {
 func (g *Generator) generate(f *desc.FileDescriptor, params *Parameters) {
 	g.usedPackages = make(map[string]bool)
 
-	// TODO: consider best order
-	ns := params.DeclareNamespace && f.GetPackage() != ""
-	if ns {
-		g.W(fmt.Sprintf("declare namespace %s {\n", f.GetPackage()))
-		g.incIndent()
-	}
-
 	g.generateEnums(f.GetEnumTypes(), params)
 	g.generateMessages(f.GetMessageTypes(), params)
 	g.generateServices(f.GetServices(), params)
-
-	if ns {
-		g.decIndent()
-		g.W("}\n")
-	}
 
 	str := g.Buffer.String()
 	g.Buffer.Reset()

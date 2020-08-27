@@ -15,13 +15,12 @@ import (
 
 var (
 	flagVerbose               = flag.Int("v", 0, "verbosity level")
-	flagDeclareNamespace      = flag.Bool("declare_namespace", true, "if true, generate a namespace declaration")
-	flagAsyncIterators        = flag.Bool("async_iterators", false, "if true, user async iterators")
+	flagAsyncIterators        = flag.Bool("async_iterators", false, "if true, use async iterators")
 	flagEnumsAsInts           = flag.Bool("int_enums", false, "if true, generate numeric enums")
 	flagOriginalNames         = flag.Bool("original_names", true, "if true, use original proto file field names, otherwise convert to lowerCamelCase")
 	flagOutputFilenamePattern = flag.String("outpattern", "{{.Dir}}/{{.Descriptor.GetPackage | default \"none\"}}.{{.BaseName}}.d.ts", "output filename pattern")
 	flagDumpDescriptor        = flag.Bool("dump_request_descriptor", false, "if true, dump request descriptor")
-	flagInt64AsString         = flag.Bool("int64_string", false, "if true, use string representation for 64 bit numbers")
+	flagInt64AsString         = flag.Bool("int64_string", true, "if true, use string representation for 64 bit numbers")
 )
 
 func main() {
@@ -43,7 +42,6 @@ func main() {
 	parseFlags(g.Request.Parameter)
 	g.GenerateAllFiles(&internal.Parameters{
 		AsyncIterators:        *flagAsyncIterators,
-		DeclareNamespace:      *flagDeclareNamespace,
 		Verbose:               *flagVerbose,
 		OutputNamePattern:     *flagOutputFilenamePattern,
 		EnumsAsInt:            *flagEnumsAsInts,
