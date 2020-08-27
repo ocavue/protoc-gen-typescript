@@ -4,10 +4,11 @@ set -x
 
 cd $(dirname $0)
 
-mkdir -p output && rm -rf output
-mkdir -p output/default
+mkdir -p output && rm -rf output && mkdir -p output
 
-protoc -I. --typescript_out=v=1:output ./input/example.proto
+mkdir -p output/case_01
+protoc -I. --typescript_out=v=1:output/case_01 ./input/example.proto
+
 
 
 # rm -fr output/*
