@@ -1,0 +1,7 @@
+# https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: true
+ReflowComments: false
+ColumnLimit: 0
+IndentWidth: 4

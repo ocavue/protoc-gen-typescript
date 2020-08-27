@@ -1,0 +1,7 @@
+{
+  "name": "protoc-gen-typescript-example",
+  "private": true,
+  "devDependencies": {
+    "typescript": "^3.9.7"
+  }
+}

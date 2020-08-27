@@ -1,0 +1,29 @@
+on: push
+
+jobs:
+  example:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v1
+
+      - uses: actions/setup-go@v2
+
+      - name: install protoc
+        uses: arduino/setup-protoc@v1
+        with:
+          version: '3.x'
+
+      - name: install protoc-gen-go
+        run: |
+          go install github.com/golang/protobuf/protoc-gen-go
+
+      - name: install protoc-gen-typescript
+        run: |
+          make build
+
+      - name: build examples
+        run: |
+          make example

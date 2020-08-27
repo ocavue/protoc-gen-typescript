@@ -1,0 +1,7 @@
+protoc-gen-typescript
+------------------
+
+protoc-gen-typescript generates TypeScript declaration files from protobuf files.
+
+Documentation:
+https://godoc.org/github.com/ocavue/protoc-gen-typescript/protoc-gen-typescript
