@@ -183,7 +183,7 @@ func (g *Generator) generateDependencies(baseFile *desc.FileDescriptor, dependen
 		if used, ok := g.usedPackages[d.GetPackage()]; ok && used {
 			g.W(importLine)
 		} else {
-			g.W(fmt.Sprintf(`// %s // imported but not used `, importLine))
+			g.W(fmt.Sprintf(`// %s // imported but not used`, importLine))
 		}
 	}
 
