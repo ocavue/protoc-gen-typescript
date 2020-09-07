@@ -343,16 +343,22 @@ func rawFieldType(f *desc.FieldDescriptor, params *Parameters, usedPackages map[
 		t := f.GetEnumType()
 		if t.GetFile().GetPackage() != f.GetFile().GetPackage() {
 			// this field is imported from the outside
-			usedPackages[t.GetFile().GetPackage()] = true
-			return formatImportModule(t.GetFile()) + "." + t.GetName()
+			packageName := t.GetFile().GetPackage()
+			fullyQualifiedName := t.GetFullyQualifiedName()
+			importName := strings.Replace(fullyQualifiedName, packageName, formatImportModule(t.GetFile()), 1)
+			usedPackages[packageName] = true
+			return importName
 		}
 		return packageQualifiedName(t)
 	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
 		t := f.GetMessageType()
 		if t.GetFile().GetPackage() != f.GetFile().GetPackage() {
 			// this field is imported from the outside
-			usedPackages[t.GetFile().GetPackage()] = true
-			return formatImportModule(t.GetFile()) + "." + t.GetName()
+			packageName := t.GetFile().GetPackage()
+			fullyQualifiedName := t.GetFullyQualifiedName()
+			importName := strings.Replace(fullyQualifiedName, packageName, formatImportModule(t.GetFile()), 1)
+			usedPackages[packageName] = true
+			return importName
 		}
 		return packageQualifiedName(t)
 	}
