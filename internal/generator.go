@@ -380,11 +380,20 @@ func (g *Generator) generateEnum(e *desc.EnumDescriptor, params *Parameters) {
 	g.writeComment(e.GetSourceInfo().GetLeadingComments())
 	g.W(fmt.Sprintf("export enum %s {", name))
 	for _, v := range e.GetValues() {
-		if params.EnumsAsInt {
-			g.W(fmt.Sprintf("    %s = %v,", v.GetName(), v.GetNumber()))
-		} else {
-			g.W(fmt.Sprintf("    %s = \"%v\",", v.GetName(), v.GetName()))
+		g.incIndent()
+
+		trailingComment := ""
+		if comment := v.GetSourceInfo().GetTrailingComments(); comment != "" {
+			trailingComment = " // " + strings.TrimSpace(comment)
 		}
+
+		if params.EnumsAsInt {
+			g.W(fmt.Sprintf("%s = %v,%v", v.GetName(), v.GetNumber(), trailingComment))
+		} else {
+			g.W(fmt.Sprintf("%s = \"%v\",%v", v.GetName(), v.GetName(), trailingComment))
+		}
+
+		g.decIndent()
 	}
 	g.W("}")
 }
